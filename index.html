@@ -1,40 +1,534 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-      <title>Drawing Class — Online & Offline</title>
-        <link rel="stylesheet" href="styles.css" />
-        </head>
-        <body>
-          <header class="site-header">
-              <div class="container">
-                    <h1 class="logo">Draw & Learn 🎨</h1>
-                          <nav>
-                                  <button id="nav-home" class="nav-btn">Home</button>
-                                          <button id="nav-about" class="nav-btn">About</button>
-                                                  <button id="nav-plans" class="nav-btn">Plans</button>
-                                                          <button id="nav-login" class="nav-btn">Login / Register</button>
-                                                                  <button id="nav-admin" class="nav-btn">Admin</button>
-                                                                        </nav>
-                                                                            </div>
-                                                                              </header>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ManikandanArts — Drawing Class (LKG → 5th)</title>
+<meta name="description" content="ManikandanArts Drawing Class — Monthly video lessons, practice sheets, UPI payments, WhatsApp support." />
+<link rel="icon" href="data:,">
 
-                                                                                <main class="container" id="main">
-                                                                                    <!-- Home -->
-                                                                                        <section id="home-view" class="view">
-                                                                                              <div class="hero">
-                                                                                                      <h2>Monthly Drawing Classes — LKG to 5th Standard</h2>
-                                                                                                              <p>Video lessons, drawing tasks, practice sheets, and monthly payments via UPI. Join and start drawing! ✏️</p>
-                                                                                                                      <div class="cta-row">
-                                                                                                                                <button id="join-now" class="btn primary">Join Now</button>
-                                                                                                                                          <a id="whatsapp-contact" class="btn" target="_blank">Contact on WhatsApp</a>
-                                                                                                                                                  </div>
-                                                                                                                                                        </div>
+<!-- Styles — colorful & professional -->
+<style>
+:root{
+  --bg: #f7fbff;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: linear-gradient(90deg,#ff7a7a,#ffb86b);
+  --accent-2: linear-gradient(90deg,#6bd3ff,#7b7bff);
+  --text: #0b1b2b;
+  --glass: rgba(255,255,255,0.6);
+  --success: #10b981;
+  --danger: #ef4444;
+  --radius: 14px;
+  --shadow: 0 8px 30px rgba(12,24,48,0.08);
+  --card-shadow: 0 6px 20px rgba(12,24,48,0.06);
+  --glass-border: 1px solid rgba(255,255,255,0.6);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 500px at 10% 10%, rgba(123,103,255,0.06), transparent 8%),
+              radial-gradient(800px 300px at 90% 90%, rgba(255,122,122,0.04), transparent 8%),
+              var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  padding-bottom:60px;
+}
 
-                                                                                                                                                              <div class="features">
-                                                                                                                                                                      <div class="card">
-                                                                                                                                                                                <h3>Video Lessons</h3>
+/* container */
+.container{max-width:1100px;margin:0 auto;padding:22px}
+
+/* header */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:14px 0;
+}
+.brand{
+  display:flex;align-items:center;gap:12px;
+}
+.logo-badge{
+  width:56px;height:56px;border-radius:12px;
+  background:var(--accent);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px;
+  box-shadow:var(--shadow);
+  transform:rotate(-6deg);
+}
+.title{
+  line-height:1;
+}
+.title h1{margin:0;font-size:20px;letter-spacing:0.2px}
+.title p{margin:0;color:var(--muted);font-size:13px}
+
+/* nav */
+.nav{display:flex;gap:8px;align-items:center}
+.btn{padding:10px 14px;border-radius:10px;border:0;background:transparent;cursor:pointer;font-weight:600;color:var(--text)}
+.btn.ghost{background:transparent;border:1px solid rgba(12,20,40,0.06)}
+.btn.primary{background:linear-gradient(90deg,#6bd3ff,#7b7bff);color:#062235;box-shadow:0 6px 18px rgba(107, 211, 255,0.16)}
+.btn.accent{background:linear-gradient(90deg,#ff7a7a,#ffb86b);color:#2b0a0a}
+.mobile-only{display:none}
+
+/* hero */
+.hero{
+  margin-top:14px;padding:22px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,0.8),rgba(255,255,255,0.6));
+  box-shadow:var(--card-shadow);display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:center;
+}
+.hero h2{margin:0;font-size:26px}
+.hero p{margin:6px 0;color:var(--muted)}
+.hero .actions{margin-top:12px;display:flex;gap:10px}
+.hero-card{
+  padding:14px;border-radius:12px;background:linear-gradient(180deg,#ffffff,#fbfdff);
+  box-shadow:0 10px 30px rgba(11,27,44,0.04);
+}
+
+/* features */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.feature{
+  background:linear-gradient(180deg,#fff,#fff);padding:14px;border-radius:12px;box-shadow:var(--card-shadow);
+}
+.feature h4{margin:0 0 6px}
+.muted{color:var(--muted)}
+
+/* layout views */
+.view{margin-top:18px}
+.hidden{display:none}
+
+/* forms and cards */
+.card{
+  background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--card-shadow);
+}
+.grid-2{display:grid;grid-template-columns:1fr 360px;gap:12px}
+.auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.input, select{width:100%;padding:10px;border-radius:8px;border:1px solid #eef2f7;font-size:14px;margin-top:8px}
+.label{font-size:13px;color:var(--muted)}
+
+/* plans table */
+.plans-table{width:100%;border-collapse:collapse;margin-top:6px}
+.plans-table th, .plans-table td{padding:12px;border-bottom:1px solid #f1f5f9;text-align:left}
+
+/* dashboard */
+.dash-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card.wide{grid-column:span 2}
+
+/* video iframe wrapper */
+.video-wrap{margin-bottom:12px}
+.iframe-wrap{border-radius:10px;overflow:hidden;border:1px solid #eef6fb;background:#000}
+
+/* responsive */
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr; padding:16px}
+  .features{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .auth-grid{grid-template-columns:1fr}
+  .dash-grid{grid-template-columns:1fr}
+  .nav .btn.hide-mobile{display:none}
+  .mobile-only{display:inline-flex}
+}
+
+/* small tweaks */
+.small{font-size:13px;padding:8px 10px}
+.qr-box{height:160px;width:160px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbfdff);display:flex;align-items:center;justify-content:center;border:1px dashed #eef6fb;color:var(--muted)}
+.footer{margin-top:26px;text-align:center;color:var(--muted);font-size:13px;padding:18px}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fef3c7,#fde68a);font-weight:700;font-size:13px}
+.notice{background:linear-gradient(90deg,#fff7ed,#fff1f2);padding:10px;border-radius:10px;border:1px solid #fff3e0;color:#7c2d12}
+
+/* subtle animations */
+.btn, .card{transition:transform .18s ease, box-shadow .18s ease}
+.btn:hover{transform:translateY(-3px)}
+.card:hover{transform:translateY(-3px)}
+</style>
+</head>
+<body>
+<div class="container">
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo-badge">MA</div>
+      <div class="title">
+        <h1>ManikandanArts</h1>
+        <p>Drawing Classes • LKG → 5th • Monthly Videos & Practice</p>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Main navigation">
+      <button class="btn" id="nav-home">Home</button>
+      <button class="btn hide-mobile" id="nav-plans">Plans</button>
+      <button class="btn hide-mobile" id="nav-about">About</button>
+      <button class="btn" id="nav-login">Login / Register</button>
+      <button class="btn primary" id="nav-admin">Admin</button>
+      <a id="whatsapp-btn" class="btn accent" target="_blank">WhatsApp</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <h2>Learn to draw with Manikandan — Fun monthly lessons for kids 🎨</h2>
+      <p class="muted">Video lessons, downloadable practice sheets, UPI monthly payments, teacher feedback & WhatsApp support.</p>
+      <div class="actions">
+        <button class="btn primary" id="cta-join">Join Now</button>
+        <button class="btn ghost" id="cta-plans">See Plans</button>
+      </div>
+
+      <div class="features" style="margin-top:18px">
+        <div class="feature card">
+          <h4>Monthly Video Lessons</h4>
+          <p class="muted">Embedded from Google Drive — watch and practice at your own pace.</p>
+        </div>
+        <div class="feature card">
+          <h4>UPI Payments</h4>
+          <p class="muted">Pay via Google Pay / PhonePe / Paytm. Upload screenshot as proof.</p>
+        </div>
+        <div class="feature card">
+          <h4>Practice & Feedback</h4>
+          <p class="muted">Upload practice images. Admin/teacher can view and mark feedback.</p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="hero-card">
+      <h3 style="margin:0 0 8px">Quick Info</h3>
+      <p class="muted small">Choose class, pay monthly, watch curated videos made for each level. Download graph sheets and submit your practice.</p>
+
+      <div style="margin-top:12px">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div class="badge">LKG → ₹25</div>
+          <div class="badge">UKG → ₹100</div>
+          <div class="badge">1st-2nd → ₹150</div>
+        </div>
+
+        <div style="margin-top:12px">
+          <p class="small muted">UPI ID</p>
+          <div style="display:flex;gap:8px;align-items:center">
+            <strong id="upi-id" style="font-size:16px">manikandan@upi</strong>
+            <button class="btn small" id="copy-upi">Copy</button>
+          </div>
+        </div>
+
+        <div style="margin-top:10px">
+          <p class="small muted">Support</p>
+          <p class="small">WhatsApp: <strong id="display-whatsapp">+91 99xxxxxxx</strong></p>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Views -->
+  <main id="main-area">
+
+    <!-- HOME VIEW (default) -->
+    <section id="home-view" class="view">
+      <div class="card" style="margin-top:14px">
+        <h3>Welcome to ManikandanArts 🎨</h3>
+        <p class="muted">Small demo site — all data stored locally in your browser. Use admin to add videos & sheets. To make it live for many users, add Firebase or a backend.</p>
+      </div>
+    </section>
+
+    <!-- PLANS -->
+    <section id="plans-view" class="view hidden">
+      <div class="card">
+        <h3>Class Plans & Monthly Fees</h3>
+        <table class="plans-table" aria-describedby="plans-desc">
+          <thead><tr><th>Class</th><th>Monthly Fee (₹)</th></tr></thead>
+          <tbody id="plans-list"></tbody>
+        </table>
+        <p id="plans-desc" class="muted small">Fees are monthly. Pay via UPI and upload proof on the payment page.</p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about-view" class="view hidden">
+      <div class="card">
+        <h3>About ManikandanArts</h3>
+        <p class="muted">Manikandan provides step-by-step drawing lessons tailored for young children. Lessons are friendly, colorful and made to build confidence.</p>
+      </div>
+    </section>
+
+    <!-- AUTH -->
+    <section id="auth-view" class="view hidden">
+      <div class="auth-grid">
+        <div class="card">
+          <h3>Register</h3>
+          <form id="register-form" autocomplete="off">
+            <label class="label">Full Name
+              <input class="input" id="reg-name" required />
+            </label>
+            <label class="label">Email
+              <input class="input" id="reg-email" type="email" required />
+            </label>
+            <label class="label">Password
+              <input class="input" id="reg-pass" type="password" required />
+            </label>
+            <label class="label">WhatsApp (with +91)
+              <input class="input" id="reg-whatsapp" placeholder="+9198..." required />
+            </label>
+            <label class="label">Choose Class
+              <select class="input" id="reg-class" required></select>
+            </label>
+            <div style="margin-top:10px">
+              <button class="btn primary" type="submit">Register</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Login</h3>
+          <form id="login-form" autocomplete="off">
+            <label class="label">Email
+              <input class="input" id="login-email" type="email" required />
+            </label>
+            <label class="label">Password
+              <input class="input" id="login-pass" type="password" required />
+            </label>
+            <div style="margin-top:10px">
+              <button class="btn primary" type="submit">Login</button>
+            </div>
+          </form>
+          <p class="muted small" style="margin-top:8px">Admin demo: <strong>admin@admin.com / admin123</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard-view" class="view hidden">
+      <div class="dash-top">
+        <div>
+          <h3 id="dash-welcome">Welcome</h3>
+          <p class="muted small" id="dash-class"></p>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn" id="btn-logout">Logout</button>
+          <button class="btn primary" id="btn-pay">Pay Monthly</button>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="card">
+          <h4>Payment Status</h4>
+          <p id="payment-status" class="muted">Not Paid</p>
+        </div>
+
+        <div class="card">
+          <h4>Download Practice Sheets</h4>
+          <ul id="pdf-list" class="muted small"></ul>
+        </div>
+
+        <div class="card wide">
+          <h4>Monthly Video Lessons</h4>
+          <div id="video-list" style="margin-top:10px"></div>
+        </div>
+
+        <div class="card">
+          <h4>Drawing Tasks (Submit)</h4>
+          <form id="task-submit-form">
+            <label class="label">Upload practice image (photo / scan)
+              <input class="input" id="task-image" type="file" accept="image/*" />
+            </label>
+            <label class="label">Notes (optional)
+              <input class="input" id="task-note" placeholder="e.g. drew a flower" />
+            </label>
+            <div style="margin-top:8px">
+              <button class="btn primary" type="submit">Submit Task</button>
+            </div>
+          </form>
+          <div style="margin-top:12px">
+            <h5>Previous submissions</h5>
+            <div id="task-list" class="muted small"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAYMENT -->
+    <section id="payment-view" class="view hidden">
+      <div class="grid-2">
+        <div class="card">
+          <h3>Monthly Payment</h3>
+          <p class="muted">Pay via UPI (Google Pay / PhonePe / Paytm). After paying, upload the screenshot here and click 'Submit Proof'.</p>
+
+          <p class="label small">UPI ID</p>
+          <div style="display:flex;gap:8px;align-items:center">
+            <strong id="pay-upi">manikandan@upi</strong>
+            <button class="btn small" id="copy-upi-2">Copy</button>
+          </div>
+
+          <p class="label small" style="margin-top:10px">Amount</p>
+          <div style="font-size:20px;font-weight:700">₹ <span id="upi-amount">0</span></div>
+
+          <label class="label" style="margin-top:12px">Upload payment screenshot
+            <input class="input" id="payment-proof" type="file" accept="image/*" />
+          </label>
+
+          <div style="margin-top:12px">
+            <button class="btn accent" id="submit-payment-proof">Submit Proof</button>
+            <button class="btn" id="pay-cancel">Cancel</button>
+          </div>
+        </div>
+
+        <aside class="card">
+          <h4>QR (placeholder)</h4>
+          <div class="qr-box" aria-hidden="true">QR</div>
+          <p class="muted small" style="margin-top:10px">For automated payments integrate a payment gateway or cloud function to verify UPI automatically.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="admin-view" class="view hidden">
+      <div class="card">
+        <h3>Admin Panel</h3>
+
+        <div id="admin-login-area">
+          <form id="admin-login-form">
+            <label class="label">Admin Email
+              <input class="input" id="admin-email" type="email" required />
+            </label>
+            <label class="label">Password
+              <input class="input" id="admin-pass" type="password" required />
+            </label>
+            <div style="margin-top:8px">
+              <button class="btn primary" type="submit">Login as Admin</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="admin-panel" class="hidden" style="margin-top:12px">
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <div style="flex:1;min-width:280px">
+              <h4>Add Video</h4>
+              <form id="add-video-form">
+                <label class="label">Title
+                  <input class="input" id="video-title" required />
+                </label>
+                <label class="label">Google Drive share link (file view link)
+                  <input class="input" id="video-link" placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=sharing" required />
+                </label>
+                <label class="label">Class (LKG / UKG / 1-2 / 3-4 / 5 / ALL)
+                  <input class="input" id="video-class" value="ALL" />
+                </label>
+                <div style="margin-top:8px"><button class="btn" type="submit">Add Video</button></div>
+              </form>
+            </div>
+
+            <div style="flex:1;min-width:280px">
+              <h4>Add Practice PDF</h4>
+              <form id="add-pdf-form">
+                <label class="label">Title
+                  <input class="input" id="pdf-title" required />
+                </label>
+                <label class="label">PDF URL (public)
+                  <input class="input" id="pdf-link" placeholder="https://example.com/sheet.pdf" required />
+                </label>
+                <div style="margin-top:8px"><button class="btn" type="submit">Add PDF</button></div>
+              </form>
+            </div>
+          </div>
+
+          <div style="margin-top:14px">
+            <h4>Students</h4>
+            <div id="admin-students" class="muted small"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    © <strong>ManikandanArts</strong> • Demo • Built with ❤️ by your assistant
+  </footer>
+</div>
+
+<!-- Full JavaScript (all-in-one) -->
+<script>
+/* ManikandanArts — Single-file demo app
+   - Data stored in localStorage
+   - Admin: admin@admin.com / admin123
+   - UPI placeholder: manikandan@upi
+   - To make production-ready: integrate Firebase or server + DB
+*/
+
+// --- Constants and Storage Keys
+const STORAGE = {
+  USERS: 'ma_users_v1',
+  SESS: 'ma_session_v1',
+  CONTENT: 'ma_content_v1'
+};
+
+const CLASS_PLANS = [
+  { id: "LKG", label: "LKG", fee: 25 },
+  { id: "UKG", label: "UKG", fee: 100 },
+  { id: "1-2", label: "1st - 2nd", fee: 150 },
+  { id: "3-4", label: "3rd - 4th", fee: 200 },
+  { id: "5", label: "5th", fee: 250 }
+];
+
+const ADMIN_CREDENTIALS = { email: "admin@admin.com", pass: "admin123" };
+const DEFAULT_UPI = 'manikandan@upi';
+const DEFAULT_WHATSAPP = '+919900000000';
+
+// --- Helpers
+function $(s){ return document.querySelector(s); }
+function $all(s){ return Array.from(document.querySelectorAll(s)); }
+function uid(){ return 'id_' + Math.random().toString(36).slice(2,9); }
+function read(key, fallback=null){ try{ const v = localStorage.getItem(key); return v ? JSON.parse(v): fallback; }catch(e){ return fallback; } }
+function write(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
+
+// --- Init default storage
+function ensureInitial(){
+  let users = read(STORAGE.USERS, []);
+  if (!users.find(u => u.email === ADMIN_CREDENTIALS.email)){
+    users.push({ id: uid(), name: 'Admin', email: ADMIN_CREDENTIALS.email, pass: ADMIN_CREDENTIALS.pass, whatsapp: '', classId: 'admin', isAdmin: true });
+    write(STORAGE.USERS, users);
+  }
+
+  let content = read(STORAGE.CONTENT);
+  if (!content){
+    content = {
+      videos: [
+        { id: uid(), title: 'Shapes & Lines (LKG)', link: 'https://drive.google.com/file/d/1_sample_file_id/view?usp=sharing', classId: 'LKG' },
+        { id: uid(), title: 'Colors & Mixing (UKG)', link: 'https://drive.google.com/file/d/2_sample_file_id/view?usp=sharing', classId: 'UKG' },
+        { id: uid(), title: 'Animals - Easy (1-2)', link: 'https://drive.google.com/file/d/3_sample_file_id/view?usp=sharing', classId: '1-2' }
+      ],
+      pdfs: [
+        { id: uid(), title: 'Graph Sheet - A4', url: 'https://example.com/graph_sample.pdf' },
+        { id: uid(), title: 'Flower Practice Sheet', url: 'https://example.com/flower_sheet.pdf' }
+      ],
+      tasks: [],
+      payments: []
+    };
+    write(STORAGE.CONTENT, content);
+  }
+}
+
+// --- UI wiring
+document.addEventListener('DOMContentLoaded', ()=>{
+  ensureInitial();
+  populatePlans();
+  populatePlanSelect();
+  updateHeaderUPI();
+  updateWhatsApp();
+  wireNav();
+  wireAuth();
+  wireDashboard();
+  wireAdmin();
+  checkSession();
+});
+
+// Navigation
+function showView(sel){
+  $all('.view').forEach(v => v.classList.add('hidden'));
+  const el = $(sel);
+  if (el) el.classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function wireNav(){
+  $('#nav-home').onclick = ()=> showView('#home-view');
+  $('#nav-plans').onclick = ()=> showView('#plans-view');
+  $('#nav-about').onclick = ()=> showVi                                                                                                                                                                                <h3>Video Lessons</h3>
                                                                                                                                                                                           <p>Monthly videos embedded from Google Drive for each class.</p>
                                                                                                                                                                                                   </div>
                                                                                                                                                                                                           <div class="card">
